@@ -12,11 +12,11 @@ public class StepTracker {
         }
     }
 
-    public void saveStatistics(int month, int day, int steps) {
+    public void saveStatistics(int month, int day, int steps) { // сохраняем количество шагов юзера в массив дней месяца
         monthToData[month].monthDays[day-1] = steps;
     }
 
-    public void getInfo(int month) {
+    public void getInfo(int month) { // метод с выводом инфы
         int[] steps = monthToData[month].monthDays;
         int sum = 0;
         int maxCountSteps = 0;

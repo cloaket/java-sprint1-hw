@@ -10,7 +10,7 @@ public class Converter {
         return steps * lengthStep;
     }
 
-    public double convertKilocalories(int steps) {
+    public double convertKcal(int steps) {
         return steps * kilocaloriesStep;
     }
 }

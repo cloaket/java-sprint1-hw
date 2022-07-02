@@ -1,4 +1,5 @@
 public class StepTracker {
+    Converter converter = new Converter();
     MonthData[] monthToData;
 
     static int goal = 10000;
@@ -16,22 +17,41 @@ public class StepTracker {
     }
 
     public void getInfo(int month) {
-        int[] monthDays = monthToData[month].monthDays;
-        for (int i = 0; i < monthDays.length; i++) {
-            System.out.print(i+1 + " день: " + monthDays[i] + ", ");
+        int[] steps = monthToData[month].monthDays;
+        int sum = 0;
+        int maxCountSteps = 0;
+        double average = 0.0;
+        int bestSeries = 0;
+        int series = 0;
+        for (int i = 0; i < steps.length; i++) {
+            System.out.print(i+1 + " день: " + steps[i] + ", ");
+            sum += steps[i];
+            average = (double) sum / steps.length;
+            if (steps[i] > maxCountSteps) {
+                maxCountSteps = steps[i];
+            }
+            if (steps[i] >= goal) {
+                ++series ;
+                if (series  > bestSeries) {
+                    bestSeries = series ;
+                }
+                else {
+                    series = 0;
+                }
+            }
         }
+        System.out.println("\nОбщее кол-во шагов: " + sum);
+        System.out.println("Максимальное ко-во шагов за месяц: " + maxCountSteps);
+        System.out.println("Среднее ко-во шагов за месяц: " + average);
+        System.out.println("Пройденная дистанция (в км): " + converter.convertKm(sum));
+        System.out.println("Количество сожжённых килокалорий: " + converter.convertKcal(sum));
+        System.out.println("Лучшая серия: " + series);
     }
+
 
     static class MonthData { // 30 дней в месяце
         int[] monthDays = new int[30];
-
-         // Всего шагов
-        int maxCountSteps = 0; // Максимальное колличество шагов в месяц
-        double averageCountSteps = 0.0; // Среднее колличество шагов в месяц
-        int countDayBestSteps = 0; // Лучшая серия колличества шагов в месяц
-        int series = 0; // Серия
-
-        }
+    }
 
 
     public void goalSteps(int userGoal) { // Замена цели

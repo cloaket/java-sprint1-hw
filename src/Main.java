@@ -11,57 +11,56 @@ public class Main {
 
         while (userInput != 0) {
             // обработка разных случаев
-            if (userInput == 1) {
-                int month;
-                int day;
-                int steps;
-                while (true) { // Узнаем месяц
-                    System.out.println("Укажите месяц: ");
-                    month =  scanner.nextInt();
-                    if (month < 0 || month > 11){
-                        System.out.println("Введено не корректное значение");
+            int month;
+            int day;
+            int steps;
+            switch (userInput){
+
+                case 1 :
+                    while (true) { // Узнаем месяц
+                        System.out.println("Укажите месяц: ");
+                        month =  scanner.nextInt();
+                        if (month < 0 || month > 11){
+                            System.out.println("Введено не корректное значение");
+                        }
+                        else break;
                     }
-                    else break;
-                }
-                while (true) { // Узнаем день
-                    System.out.println("Укажите день: ");
-                    day =  scanner.nextInt();
-                    if (day < 0 || day> 30){
-                        System.out.println("Введено не корректное значение");
+                    while (true) { // Узнаем день
+                        System.out.println("Укажите день: ");
+                        day =  scanner.nextInt();
+                        if (day < 0 || day> 30){
+                            System.out.println("Введено не корректное значение");
+                        }
+                        else break;
                     }
-                    else break;
-                }
-                while (true) {
-                    System.out.println("Укажите кол-во шагов: ");
-                    steps =  scanner.nextInt();
-                    if (steps < 0){
-                        System.out.println("Введено не корректное значение");
+                    while (true) {
+                        System.out.println("Укажите кол-во шагов: ");
+                        steps =  scanner.nextInt();
+                        if (steps < 0){
+                            System.out.println("Введено не корректное значение");
+                        }
+                        else break;
                     }
-                    else break;
-                }
-
-                stepTracker.saveStatistics(month, day, steps);
-
-            } else if (userInput == 2) {
-                int month;
-                while (true){
-                   System.out.println("За какой месяц статистику: ");
-                   month = scanner.nextInt();
-                   if (month < 0 || month > 11) {
-                       System.out.println("Введено не корректное значение");
-                   }
-                   else break;
-                }
-
-                stepTracker.getInfo(month);
-
-            } else if (userInput == 3) {
-                System.out.println("Укажите цель: ");
-                int userGoal =  scanner.nextInt();
-                stepTracker.goalSteps(userGoal);
-            }
-            else {
-                System.out.println("Введено не корректное значение");
+                    stepTracker.saveStatistics(month, day, steps);
+                    break;
+                case 2 :
+                    while (true){
+                        System.out.println("За какой месяц статистику: ");
+                        month = scanner.nextInt();
+                        if (month < 0 || month > 11) {
+                            System.out.println("Введено не корректное значение");
+                        }
+                        else break;
+                    }
+                    stepTracker.getInfo(month);
+                    break;
+                case 3:
+                    System.out.println("Укажите цель: ");
+                    int userGoal =  scanner.nextInt();
+                    stepTracker.goalSteps(userGoal);
+                default:
+                    System.out.println("Введено не корректное значение");
+                    break;
             }
             printMenu(); // печатаем меню ещё раз перед завершением предыдущего действия
             userInput = scanner.nextInt(); // повторное считывание данных от пользователя
